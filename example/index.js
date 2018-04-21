@@ -73,7 +73,27 @@ app.get('/index', function(req, res) {
     }
   })
 })
-
+app.get('/login', function(req, res) {
+  res.sendFile(path.join(__dirname, '/assets/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+app.get('/signup', function(req, res) {
+  res.sendFile(path.join(__dirname, '/assets/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+app.get('/editor', function(req, res) {
+  res.sendFile(path.join(__dirname, '/assets/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 app.use('/', express.static(path.resolve(__dirname, 'assets')));
 app.use('/node_modules', express.static(path.resolve(__dirname, '..', 'node_modules')));
 app.use(function(err, req, res, next) {

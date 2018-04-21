@@ -4,7 +4,6 @@ import Editor from '../src';
 import { Blocks, Data } from './draft';
 import request from 'superagent';
 import createToolbarPlugin from 'draft-js-toolbar-plugin';
-import {jQuery} from 'jquery';
 import ReactDOM from 'react-dom';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -334,7 +333,3 @@ class myEditor extends React.Component {
         );
     }
 }
-module.exports = {
-  Home,
-  myEditor
-};

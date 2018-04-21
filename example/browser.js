@@ -1,9 +1,10 @@
 import 'babel-polyfill';
+import Example from './container';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './container';
+import Home from './container'
 
 ReactDOM.render(
-  <Home />,
+  <Example />,
   document.getElementById('target')
 );
