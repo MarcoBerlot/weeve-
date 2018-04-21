@@ -1,0 +1,56 @@
+{
+  "name": "draft-wysiwyg",
+  "version": "0.2.4",
+  "author": "Benjamin Kniffler",
+  "license": "MIT",
+  "repository": "https://github.com/bkniffler/draft-wysiwyg",
+  "main": "./lib",
+  "engines": {
+    "node": "5.x.x",
+    "npm": "3.x.x"
+  },
+  "keywords": [
+    "draftjs",
+    "draft-js",
+    "editor",
+    "wysiwyg",
+    "drag",
+    "drop",
+    "react",
+    "richtext"
+  ],
+  "scripts": {
+    "start": "node ./example",
+    "build": "babel --presets es2015,stage-0,react src/ --out-dir lib/",
+    "heroku": "git push heroku master",
+    "start:production": "NODE_ENV=production node ./example",
+    "build:example": "gulp build",
+    "patch": "npm run build; npm version patch --force; npm publish"
+  },
+  "dependencies": {
+    "draft-js": "^0.7.0",
+    "draft-js-alignment-plugin": "^1.0.3",
+    "draft-js-cleanup-empty-plugin": "^1.0.2",
+    "draft-js-dnd-plugin": "^1.0.7",
+    "draft-js-entity-props-plugin": "^1.0.2",
+    "draft-js-focus-plugin": "^1.0.12",
+    "draft-js-image-plugin": "^1.0.3",
+    "draft-js-plugins-editor-wysiwyg": "^1.0.3",
+    "draft-js-resizeable-plugin": "^1.0.8",
+    "draft-js-table-plugin": "^1.0.4",
+    "draft-js-toolbar-plugin": "^1.0.5",
+    "immutable": "^3.7.4",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-tag-input": "^5.0.1"
+  },
+  "devDependencies": {
+    "express": "^4.13.1",
+    "gulp": "^3.9.0",
+    "multer": "^1.1.0",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "superagent": "^1.8.0",
+    "wrappack": "^0.3.10"
+  }
+}
