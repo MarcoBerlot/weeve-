@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { RichUtils } from 'draft-js';
 import Editor from '../src';
 import { Blocks, Data } from './draft';
@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import "./assets/css/login.css";
 
 
-export default class myRouter extends React.Component{
+export default class myRouter extends Component {
   render(){
     return(
     <Router>
@@ -24,7 +24,105 @@ export default class myRouter extends React.Component{
   </Router>
 )}
 }
-class Login extends React.Component {
+
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  validateForm() {
+    return this.state.email.length > 0 && this.state.password.length > 0;
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+  }
+
+  handleLogIn = event => {
+    event.preventDefault();
+    // console.log(this.state.email);
+    // console.log(this.state.password);
+    // var request = new XMLHttpRequest();
+    // request.open('POST', 'http://localhost:8080/auth/login', true);
+    // request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    // var idToken = null;
+
+    // var item = {}
+    // item ['username'] = this.state.email;
+    // item ['password'] = this.state.password;
+    // console.log(JSON.stringify(item))
+    // var r = null;
+    // r = request.send(JSON.stringify(item));
+    
+    // console.log(r.json()['token']);
+    fetch('http://localhost:8080/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        // username: 'user_1@cornell.edu',
+        // password: 'password',
+        username: this.state.email,
+        password: this.state.password,
+      })
+    }).then(dataWrappedByPromise => dataWrappedByPromise.json())
+      .then(data => {
+      // you can access your data here
+        console.log(data)
+      // console.log(response.status);
+      // console.log(response.json())
+    })
+  }
+
+  render() {
+    return (
+      <div className="Login">
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+            <ControlLabel>Email</ControlLabel>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <ControlLabel>Password</ControlLabel>
+            <FormControl
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+
+          <Button onClick={this.handleLogIn}
+            block
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+          >
+            Login
+          </Button>
+        </form>
+      </div>
+    );
+  }
+}
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -82,65 +180,7 @@ class Login extends React.Component {
     );
   }
 }
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      password: ""
-    };
-  }
-
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Login
-          </Button>
-        </form>
-      </div>
-    );
-  }
-}
-class Home extends React.Component {
+class Home extends Component {
    state = {
    }
    render () {
@@ -153,7 +193,7 @@ class Home extends React.Component {
    }
 }
 
-class myEditor extends React.Component {
+class myEditor extends Component {
     constructor(props) {
         super(props);
 
