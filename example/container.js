@@ -78,9 +78,11 @@ class Login extends Component {
         password: this.state.password,
       })
     }).then(dataWrappedByPromise => dataWrappedByPromise.json())
-      .then(data => {
+      .then(tokenID => {
       // you can access your data here
-        console.log(data)
+        console.log(tokenID["token"])
+      // save it to the local storage
+        localStorage.setItem("tokenID", tokenID["token"]);
       // console.log(response.status);
       // console.log(response.json())
     })
@@ -244,21 +246,21 @@ class myEditor extends Component {
 
     save(){
         URL="http://localhost:8080"
-        TOKEN="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1iMjU4OUBjb3JuZWxsLmVkdSIsImlhdCI6MTUyNDMzNTU0MCwiZXhwIjoxNTI0NDIxOTQwfQ.WbLvPSMk1eSmLVx4_-kB6mRTmksJdz1PsU2w-xWJ9HY"
+        var TOKEN=localStorage.getItem("tokenID");
         localStorage.setItem("data", JSON.stringify(this.state.data));
         localStorage.setItem("hash", this.hash);
         /*IMPLEMENT: GET USER ID FROM BACKEND*/
         var sendingData = {}
         sendingData["collaborators"]=[1]
         sendingData["title"]="title"
-        sendingData["explicit_tags"]=this.state.tags
-        sendingData["body"]=this.state.data
+        sendingData["explicit_tags"]= ["testing","with","marco"]
+        sendingData["body"]="this.state.data"
         console.log(sendingData)
 
         fetch(URL+'/post/', {
           method: 'POST',
           headers: {
-            'Authorization': "bearer "+TOKEN,
+            'Authorization': "bearer " + TOKEN,
             'Content-Type': 'application/json',
           },
           body: sendingData
