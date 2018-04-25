@@ -51,21 +51,7 @@ class Login extends Component {
 
   handleLogIn = event => {
     event.preventDefault();
-    // console.log(this.state.email);
-    // console.log(this.state.password);
-    // var request = new XMLHttpRequest();
-    // request.open('POST', 'http://localhost:8080/auth/login', true);
-    // request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    // var idToken = null;
 
-    // var item = {}
-    // item ['username'] = this.state.email;
-    // item ['password'] = this.state.password;
-    // console.log(JSON.stringify(item))
-    // var r = null;
-    // r = request.send(JSON.stringify(item));
-    
-    // console.log(r.json()['token']);
     fetch('http://localhost:8080/auth/login', {
       method: 'POST',
       headers: {
@@ -83,8 +69,11 @@ class Login extends Component {
         console.log(tokenID["token"])
       // save it to the local storage
         localStorage.setItem("tokenID", tokenID["token"]);
-      // console.log(response.status);
-      // console.log(response.json())
+        if(tokenID["token"]!=null){
+          document.location.href = "http://localhost:3030/editor";
+        }else{
+          alert("Wrong Username or Password")
+        }
     })
   }
 
